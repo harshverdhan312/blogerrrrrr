@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.link {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+
+.link2 {
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+.easyhover {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
