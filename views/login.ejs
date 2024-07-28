@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogerrrrrr</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-green-500 to-blue-500">
+    <div class="grandparent link">
+        <nav class="flex justify-between">
+            <h1 class="m-4 text-blue-900 font-serif text-3xl">
+                Blogerrrrrr
+            </h1>
+            <ul class="flex">
+                <li class="m-4 text-2xl">
+                    <a href="/" class="btn font-serif bg-green-500 text-slate-600 py-2 px-4 rounded-full hover:bg-slate-300 hover:text-green-700 easyhover">Home</a>
+                </li>
+                <li class="m-4 text-2xl">
+                    <a href="#" class="btn font-serif bg-green-500 text-slate-600 py-2 px-4 rounded-full hover:bg-slate-300 hover:text-green-700 easyhover">Contact Us</a>
+                </li>
+                <li class="m-4 text-2xl">
+                    <a href="#" class="btn font-serif bg-green-500 text-slate-600 py-2 px-4 rounded-full hover:bg-slate-300 hover:text-green-700 easyhover">About Us</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="flex justify-evenly mt-8 md:mt-10 px-4 md:px-0">
+            <form class="w-full max-w-md md:max-w-lg glassmorphism-form p-6 md:p-8" action="#" method="post">
+                <div class="mb-4">
+                    <label class="block text-gray-900 text-sm font-bold mb-2" for="email">Email</label>
+                    <input class="glassmorphism-input w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" name="email" autocomplete="email" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-900 text-sm font-bold mb-2" for="password">Password</label>
+                    <input class="glassmorphism-input w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type="password" autocomplete="current-password" required>
+                </div>
+                <label class="block text-blue-600 text-sm font-medium mb-2 hover:text-green-900" for="signupcta"><a href="/signup">New? Sign Up instead</a></label>
+                <div class="flex items-center justify-between">
+                    <button class="bg-blue-200 hover:bg-blue-300 text-black font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="submit">
+                        Login
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+</body>
+</html>

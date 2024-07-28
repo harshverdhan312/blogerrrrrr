@@ -2,13 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .link {
   opacity: 0;
   animation: fadeIn 1s ease-in-out forwards;
 }
-
 
 .link2 {
   opacity: 0;
@@ -16,7 +13,30 @@
 }
 
 .easyhover {
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition: background-color 0.7s ease-in-out, color 0.7s ease-in-out;
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(20px);
+}
+
+input::placeholder {
+  color: rgba(55, 65, 81, 0.7); /* Darker gray placeholder */
+}
+
+/* Glassmorphism styles */
+.glassmorphism-form {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glassmorphism-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 @keyframes fadeIn {
