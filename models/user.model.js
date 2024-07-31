@@ -41,6 +41,10 @@ const userSchema = new Schema(
         //edit this
         type:string
       },
+      blogs:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Blog"
+      },
       following:{
         type:Number,
         default:0
@@ -59,5 +63,5 @@ userSchema.pre("save", async function (next) {
     next();
 });
 
-const userModel = mongoose.model("user", userSchema);
+const userModel = mongoose.model("User", userSchema);
 exports.UserModel = userModel;
