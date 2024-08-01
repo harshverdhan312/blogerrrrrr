@@ -46,12 +46,14 @@ const userSchema = new Schema(
         ref:"Blog"
       },
       following:{
-        type:Number,
-        default:0
+        type: mongoose.Schema.Types.ObjectId,
+            ref:"following",
+            required:true,
       },
       followers:{
-        type:Number,
-        default:0
+        type: mongoose.Schema.Types.ObjectId,
+            ref:"followers",
+            required:true,
       }
     },{ timestamps: true }
 )

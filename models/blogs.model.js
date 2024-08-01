@@ -36,9 +36,9 @@ const blogsSchema = new Schema(
         required: true
       },
       likesCount:{
-        type: Number,
-        default: 0,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Like",
+        required:true,
       }
       
     },{
@@ -47,5 +47,5 @@ const blogsSchema = new Schema(
 
 
 
-const blogModel = mongoose.model("Blog", blogsSchemaSchema);
+const blogModel = mongoose.model("Blog", blogsSchema);
 exports.blogModel = blogModel;
