@@ -1,9 +1,11 @@
 const express = require("express")
 const mongo = require ("mongoose")
 const path = require('path');
+require("dotenv").config();
 
 const app = express()
 
+const port = process.env.PORT || 5535
 
 app.set('view engine', 'ejs');
 
@@ -30,6 +32,6 @@ app.get("/profile",(req,res)=>{
     res.render("profile")
 })
 
-app.listen(3020,(req,res)=>{
-    console.log(`Server running at: http://127.0.0.1:${3020}`);
+app.listen(port,(req,res)=>{
+    console.log(`Server running at: http://127.0.0.1:${port}`);
 })

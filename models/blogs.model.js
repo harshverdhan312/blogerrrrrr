@@ -39,10 +39,14 @@ const blogsSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref:"Like",
         required:true,
+      },
+      comments:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Comment",
       }
       
     },{
-      timeseries:true
+      timestamps:true
     })
 
 

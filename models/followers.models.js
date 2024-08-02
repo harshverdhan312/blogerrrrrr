@@ -19,10 +19,8 @@ const followersUserSchema = new Schema(
         ]
       
     },{
-      timeseries:true
+      timestamps:true
     })
-
-
 
 const followersModel = mongoose.model("followers", followersUserSchema);
 exports.followersModel = followersModel;

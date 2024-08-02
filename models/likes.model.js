@@ -22,7 +22,7 @@ const likesCountSchema = new Schema(
         }
       
     },{
-      timeseries:true
+      timestamps:true
     })
 
 
