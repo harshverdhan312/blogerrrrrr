@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const { Schema } = require("mongoose");
-
+const jwt = require("jsonwebtoken")
 
 const userSchema = new Schema(
     {
@@ -54,6 +54,9 @@ const userSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
             ref:"followers",
             required:true,
+      },
+      refreshTokens:{
+        type:String
       }
     },{ timestamps: true }
 )
@@ -64,6 +67,31 @@ userSchema.pre("save", async function (next) {
     }
     next();
 });
+userSchema.method.generateAccessToken = function(){
+    return jwt.sign({
+      _id : this.id,
+      _username : this.username,
+      _email : this.email,
+      _fullname : this.name
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIN : process.env.ACCESS_TOKEN_EXPIRY
+    }
+  )
+}
+userSchema.method.generateRefreshToken = function(){
+  return jwt.sign({
+    _id : this.id,
+    
+  },
+  process.env.REFRESH_TOKEN_SECRET,
+  {
+    expiresIN : process.env.REFRESH_TOKEN_EXPIRY
+  }
+)
+}
+
 
 const userModel = mongoose.model("User", userSchema);
 exports.UserModel = userModel;
