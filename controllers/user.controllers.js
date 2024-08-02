@@ -8,4 +8,4 @@ const registerUser= asyncHandler (async(req,res)=>{
 })
 
 
-module.export = {registerUser}
+module.exports = {registerUser}

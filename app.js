@@ -24,4 +24,4 @@ app.use("/api/v1/users", userRouter)
 
 
 
-module.export = {app}
+module.exports = {app}
