@@ -5,11 +5,11 @@ const jwt = require("jsonwebtoken")
 
 const userSchema = new Schema(
     {
-      name: {
+      fullName: {
         type: String,
         required: true,
       },
-      profilePic:{
+      avatar:{
         type:String,
         required:true
       },
@@ -32,14 +32,14 @@ const userSchema = new Schema(
         required:true
       },
       purpose:{
-        type:string,
+        type:String,
         possibleValues: ["Read", "Writing", "Both"],
         default: "Both",
         required:"true"
       },
       prefferedGenre:{
         //edit this
-        type:string
+        type:String
       },
       blogs:{
         type:mongoose.Schema.Types.ObjectId,
@@ -94,4 +94,4 @@ userSchema.method.generateRefreshToken = function(){
 
 
 const userModel = mongoose.model("User", userSchema);
-exports.UserModel = userModel;
+module.exports.userModel = userModel;
