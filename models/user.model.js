@@ -47,13 +47,11 @@ const userSchema = new Schema(
       },
       following:{
         type: mongoose.Schema.Types.ObjectId,
-            ref:"following",
-            required:true,
+        ref:"following",
       },
       followers:{
         type: mongoose.Schema.Types.ObjectId,
-            ref:"followers",
-            required:true,
+        ref:"followers",
       },
       refreshTokens:{
         type:String

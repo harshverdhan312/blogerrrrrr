@@ -1,6 +1,9 @@
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
-
+const {ApiError}= require("../utils/ApiError.js")
+require("dotenv").config({
+    path: './.env'
+})
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
@@ -22,7 +25,7 @@ const uploadOnCloudinary = async (localFilePath) => {
 
     } catch (error) {
         fs.unlinkSync(localFilePath) // remove the locally saved temporary file as the upload operation got failed
-        return null;
+        return error
     }
 }
 

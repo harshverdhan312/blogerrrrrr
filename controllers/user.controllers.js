@@ -1,6 +1,7 @@
 const { asyncHandler } = require("../utils/asyncHandler");
 const {ApiError} = require("../utils/ApiError.js")
-const {User} = require("../models/user.model.js")
+const {ApiResponse} = require("../utils/ApiResponse.js")
+const {userModel} = require("../models/user.model.js")
 const{ uploadOnCloudinary } = require("../utils/cloudinary.js")
 
 const registerUser= asyncHandler (async(req,res)=>{
@@ -11,10 +12,10 @@ const registerUser= asyncHandler (async(req,res)=>{
     ){
         throw new ApiError(400, "All fields are required")
     }
-
-    const existedUser = await User.findOne({
-        $or: [{username},{email}]
-    })
+    const existedUser = await userModel.findOne({
+        $or: [{ username }, { email }]
+    });
+    
 
     if (existedUser){
         throw new ApiError(409, "User with same email and username exists ")
@@ -27,12 +28,13 @@ const registerUser= asyncHandler (async(req,res)=>{
     }
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
-
+    console.log(avatar);
+    
     if(!avatar){
         throw new ApiError(400, "Avatar file uplaod fail, Reupload!!!")
     }
 
-    const user = await User.create({
+    const user = await userModel.create({
         fullName,
         avatar:avatar.url,
         email,
@@ -42,7 +44,7 @@ const registerUser= asyncHandler (async(req,res)=>{
         purpose,
     })
 
-    const createdUser = await User.findbyId(user,_id).select(
+    const createdUser = await userModel.findById(user._id).select(
         "-password -refreshToken"
     )
     if (!createdUser) {
