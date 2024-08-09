@@ -1,5 +1,5 @@
-const ApiError = require("../utils/ApiError");
-const asyncHandler = require("../utils/asyncHandler.js");
+const {ApiError} = require("../utils/ApiError");
+const {asyncHandler} = require("../utils/asyncHandler.js");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
@@ -26,4 +26,6 @@ const verifyJWT = asyncHandler(async (req, _, next) => {
   }
 });
 
-module.exports = verifyJWT;
+module.exports = {
+  verifyJWT
+}
