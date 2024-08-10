@@ -7,6 +7,12 @@ const {verifyJWT} = require("../middlewares/auth.middleware.js")
 
 const router = Router()
 
+
+
+router.route('/readblogs').get(
+    getRandomBlogs
+);
+
 // secured routes
 router.route("/postblog").post(
     upload.fields([
