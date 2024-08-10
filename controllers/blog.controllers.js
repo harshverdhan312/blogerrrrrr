@@ -6,7 +6,7 @@ const {blogModel} = require("../models/blogs.model.js")
 const{ uploadOnCloudinary } = require("../utils/cloudinary.js")
 
 
-const saveBlog = asyncHandler(async(req,res)=>{
+const postBlog = asyncHandler(async(req,res)=>{
     const {blogTitle, blogBody, blogGenre, blogLenght, isSuitableForKids} =req.body
 
     if(
@@ -27,6 +27,7 @@ const saveBlog = asyncHandler(async(req,res)=>{
     }
 
     const blog = await blogModel.create({
+        author:req.user._id,
         blogTitle,
         blogBody,
         blogGenre,
@@ -34,7 +35,9 @@ const saveBlog = asyncHandler(async(req,res)=>{
         isSuitableForKids,
         coverImage:coverImage.url,
     })
+
     const createdBlog = await userModel.findById(blog._id)
+
     if (!createdBlog) {
         throw new ApiError(500, "Something went wrong while uploading the Blog")
     }
@@ -42,10 +45,79 @@ const saveBlog = asyncHandler(async(req,res)=>{
     return res.status(201).json(
         new ApiResponse(200, createdBlog, "Blog Uploaded Successfully")
     )
+})
+
+
+const updateBlog = asyncHandler(async(req,res)=>{
+    const {updatedBlogTitle, updatedBlogBody, updatedBlogGenre, updatedBlogLenght, updatedIsSuitableForKids} =req.body
+
+    if(
+        !(updatedBlogTitle || updatedBlogBody || updatedBlogGenre || updatedBlogLenght ||updatedIsSuitableForKids)
+    ){
+        throw new ApiError(400, "All fields are required")
+    }
+
+    const blog = await blogModel.findByIdAndUpdate(
+        req.blog?._id,
+        {
+            $set: {
+                updatedBlogTitle,
+                updatedBlogBody,
+                updatedBlogGenre,
+                updatedBlogLenght,
+                updatedIsSuitableForKids
+            }
+        },
+        {new: true}
+    )
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200, blog, "Blog updated successfully"
+        )
+    )
+})
+
+const updateCoverImage = asyncHandler(async(req,res)=>{
+    const coverImageLocalPath = req.file?.path
+    if (!coverImageLocalPath) {
+        throw new ApiError(400, "Avatar file is missing")
+    }
+
+    //TODO: delete old image 
+
+    const coverImage = await uploadOnCloudinary(coverImageLocalPath)
+
+    if (!coverImage.url) {
+        throw new ApiError(400, "Error while uploading on avatar")
+        
+    }
+
+    const blog = await userModel.findByIdAndUpdate(
+        req.blog?._id,
+        {
+            $set:{
+                coverImage: coverImage.url
+            }
+        },
+        {new: true}
+    )
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200, blog, "Cover image updated successfully"
+        )
+    )
 
 })
 
 
+
 module.exports = {
-    saveBlog,
+    postBlog,
+    updateBlog,
+    updateCoverImage,
 }
