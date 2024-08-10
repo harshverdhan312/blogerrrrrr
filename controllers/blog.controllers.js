@@ -114,10 +114,39 @@ const updateCoverImage = asyncHandler(async(req,res)=>{
 
 })
 
+// for those who didnt signed up or logged in yet 
+const getRandomBlogs = asyncHandler(async (req, res) => {
+    const blogs = await blogModel.aggregate([
+        { $sample: { size: 10 } }, 
+        { 
+            $project: {
+                _id: 1,
+                title: 1,
+                author: 1,
+                coverImage: 1,
+                mainbody: 1,
+                genre: 1,
+                wordslenght: 1,
+                forkids: 1,
+                likesCount: 1,
+                comments: 1,
+                createdAt: 1
+            } 
+        } 
+    ]);
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,blogs,"Random Blogs sent")
+    )
+});
+
 
 
 module.exports = {
     postBlog,
     updateBlog,
     updateCoverImage,
+    getRandomBlogs
 }
