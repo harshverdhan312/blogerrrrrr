@@ -114,6 +114,7 @@ const updateCoverImage = asyncHandler(async(req,res)=>{
 
 })
 
+
 // for those who didnt signed up or logged in yet 
 const getRandomBlogs = asyncHandler(async (req, res) => {
     const blogs = await blogModel.aggregate([
@@ -142,11 +143,60 @@ const getRandomBlogs = asyncHandler(async (req, res) => {
     )
 });
 
+const getBlogsFromFollowers = asyncHandler(async(req,res)=>{
+    try {
+        const userId = req.params.id;
+        const user = await userModel.findById(userId)
+            .populate({
+                path: 'followers',
+                populate: {
+                    path: 'blogs',
+                    model: 'Blog'
+                }
+            });
+        if (!user) {
+            throw new ApiError("404","User not Found")
+        }
+        const blogs = {
+            followers: user.followers 
+        }
+        return res.status(201).json(
+            new ApiResponse(200,blogs,"Targeted Blogs sent")
+        )
+    } catch (error) {
+        throw new ApiError("400", error)
+    }  
+})
+
+const getBlogsFromPreferredGenre = asyncHandler(async (req, res) => {
+    try {
+        const user = await userModel.findById(req.params.id);
+        
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        const blogs = await blogModel.find({
+            author: {
+                $in: await userModel.find({ prefferedGenre: user.prefferedGenre }).distinct('_id')
+            },
+            genre: user.prefferedGenre
+        }).populate('author');
+        return res
+        .status(200)
+        .json(new ApiResponse(200,blogs,"Targeted Blogs over genre preference sentz"))
+    } catch (error) {
+        throw new ApiError(500,error)
+    }
+});
+
 
 
 module.exports = {
     postBlog,
     updateBlog,
     updateCoverImage,
-    getRandomBlogs
+    getRandomBlogs,
+    getBlogsFromFollowers,
+    getBlogsFromPreferredGenre
 }
