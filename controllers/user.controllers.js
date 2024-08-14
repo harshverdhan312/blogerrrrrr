@@ -226,7 +226,9 @@ const getCurrentUser = asyncHandler(async(req, res) => {
     .status(200)
     .json(new ApiResponse(
         200,
-        req.user,
+        req.user.select(
+            -password , -refreshToken
+        ),
         "User fetched successfully"
     ))
 })
@@ -253,7 +255,7 @@ const updateAccountDetails = asyncHandler(async(req, res) => {
     return res
     .status(200)
     .json(new ApiResponse(200, user, "Account details updated successfully"))
-});
+});0
 
 const updateUserAvatar = asyncHandler(async(req, res) => {
     const avatarLocalPath = req.file?.path
@@ -288,7 +290,28 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
     )
 })
 
-
+const searchProfile = asyncHandler(async(req,res)=>{
+    const username = req.body
+    const user =userModel.findOne(
+        { usernamer: username},
+        { 
+            username:1,
+            fullName:1,
+            avatar:1,
+            blogs:1,
+            followers:1,
+            following:1
+        }
+    )
+    if(!user){
+        throw new ApiError(400,"User not found")
+    }
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200, user, "User found and returned" )
+    )
+})
 
 
 
@@ -301,4 +324,5 @@ module.exports = {
     getCurrentUser,
     updateAccountDetails,
     updateUserAvatar,
+    searchProfile
 }
