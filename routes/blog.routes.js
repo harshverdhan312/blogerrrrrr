@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const {postBlog, updateBlog, updateCoverImage} = require("../controllers/blog.controllers.js");
+const {postBlog, updateBlog, updateCoverImage,getRandomBlogs,getBlogsFromFollowers,getBlogsFromPreferredGenre} = require("../controllers/blog.controllers.js");
 const {upload} = require("../middlewares/multer.middleware.js")
 const {verifyJWT} = require("../middlewares/auth.middleware.js")
 
@@ -40,5 +40,13 @@ router.route("/updatecoverimage").post(
     verifyJWT,
     updateCoverImage
 )
+router.route('/blogsforyou').get(
+    verifyJWT,
+    getBlogsFromPreferredGenre
+);
+router.route('/yourblogs').get(
+    verifyJWT,
+    getBlogsFromFollowers
+);
 
 module.exports = router;
