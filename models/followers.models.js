@@ -5,12 +5,12 @@ const { Schema } = require("mongoose");
 
 const followersUserSchema = new Schema(
     {
-        user: {
+        user: {//author
             type: mongoose.Schema.Types.ObjectId,
             ref:"User",
             required: true,
           },
-          followers:[
+          followers:[//audience
             {
             type: mongoose.Schema.Types.ObjectId,
             ref:"User",

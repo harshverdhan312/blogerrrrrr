@@ -18,14 +18,14 @@ app.use(cookieParser())
 const userRouter = require("./routes/user.routes.js")
 const blogRouter = require("./routes/blog.routes.js")
 const healthcheckRouter = require("./routes/healthcheck.routes");
-
+const followRouter = require("./routes/follow.routes.js")
 
 //routes declaration
 
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/blogs", blogRouter)
 app.use("/api/v1/healthcheck", healthcheckRouter);
-
+app.use("/api/v1/follow",followRouter)
 
 
 module.exports = {app}
