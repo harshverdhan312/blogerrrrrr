@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const {addFollow,removeFollow,getfollow, countFollow} = require("../controllers/follow.controllers.js");
+const {addFollow,removeFollow,countFollow} = require("../controllers/follow.controllers.js");
 const {verifyJWT} = require("../middlewares/auth.middleware.js")
 
 

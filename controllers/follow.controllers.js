@@ -1,7 +1,5 @@
 const { asyncHandler } = require("../utils/asyncHandler");
-const { ApiError } = require("../utils/ApiError.js")
 const { ApiResponse } = require("../utils/ApiResponse.js")
-const { userModel } = require("../models/user.model.js")
 const { followersModel } = require("../models/followers.models.js")
 const { followingModel } = require("../models/following.models.js")
 
