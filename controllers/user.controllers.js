@@ -8,7 +8,7 @@ const{ uploadOnCloudinary } = require("../utils/cloudinary.js")
 
 const generateAccessAndRefreshTokens = async(userId) =>{
     try {
-        const user = await User.findById(userId)
+        const user = await userModel.findById(userId)
         const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
 
@@ -166,7 +166,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET
         )
     
-        const user = await User.findById(decodedToken?._id)
+        const user = await userModel.findById(decodedToken?._id)
     
         if (!user) {
             throw new ApiError(401, "Invalid refresh token")
@@ -182,7 +182,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             secure: true
         }
     
-        const {accessToken, newRefreshToken} = await generateAccessAndRefereshTokens(user._id)
+        const {accessToken, newRefreshToken} = await generateAccessAndRefreshTokens(user._id)
     
         return res
         .status(200)
