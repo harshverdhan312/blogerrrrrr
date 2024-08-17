@@ -9,11 +9,6 @@ const commentSchema = new Schema(
             ref:"User",
             required: true,
         },
-        author:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref:"User",
-            required: true,
-        },
         blog:{
             type: mongoose.Schema.Types.ObjectId,
             ref:"Blog",
