@@ -14,7 +14,7 @@ const commentSchema = new Schema(
             ref:"Blog",
             required: true,
         },
-        comment:[{
+        comments:[{
             type:String,
         }]
         
