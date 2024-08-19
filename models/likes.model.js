@@ -22,4 +22,4 @@ const likesCountSchema = new Schema(
 
 
 const likeModel = mongoose.model("Like", likesCountSchema);
-exports.likeModel = likeModel;
+module.exports.likeModel = likeModel;

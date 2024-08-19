@@ -49,4 +49,4 @@ router.route('/yourblogs').get(
     getBlogsFromFollowers
 );
 
-module.exports = router;
+module.exports = {router};

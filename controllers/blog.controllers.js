@@ -1,10 +1,18 @@
 const { asyncHandler } = require("../utils/asyncHandler");
-const {ApiError} = require("../utils/ApiError.js")
-const {ApiResponse} = require("../utils/ApiResponse.js")
-const {userModel} = require("../models/user.model.js")
-const {blogModel} = require("../models/blogs.model.js")
+const { ApiError } = require("../utils/ApiError.js")
+const { ApiResponse } = require("../utils/ApiResponse.js")
+const { userModel } = require("../models/user.model.js")
+const { blogModel } = require("../models/blogs.model.js")
 const{ uploadOnCloudinary } = require("../utils/cloudinary.js")
 
+
+/* const readBlog = async(blogId)=>{
+    blog = await blogModel.findOne(blogId)
+    if (!blog){
+        throw new ApiError(404,"Blog not found")
+    }
+    return res.status(200).json(new ApiResponse(200,blog,"blog fetched successfully"))
+} */
 
 const postBlog = asyncHandler(async(req,res)=>{
     const {blogTitle, blogBody, blogGenre, blogLenght, isSuitableForKids} =req.body
@@ -46,7 +54,6 @@ const postBlog = asyncHandler(async(req,res)=>{
         new ApiResponse(200, createdBlog, "Blog Uploaded Successfully")
     )
 })
-
 
 const updateBlog = asyncHandler(async(req,res)=>{
     const {updatedBlogTitle, updatedBlogBody, updatedBlogGenre, updatedBlogLenght, updatedIsSuitableForKids} =req.body
@@ -113,7 +120,6 @@ const updateCoverImage = asyncHandler(async(req,res)=>{
     )
 
 })
-
 
 // for those who didnt signed up or logged in yet 
 const getRandomBlogs = asyncHandler(async (req, res) => {
@@ -184,7 +190,7 @@ const getBlogsFromPreferredGenre = asyncHandler(async (req, res) => {
         }).populate('author');
         return res
         .status(200)
-        .json(new ApiResponse(200,blogs,"Targeted Blogs over genre preference sentz"))
+        .json(new ApiResponse(200,blogs,"Targeted Blogs over genre preference sent"))
     } catch (error) {
         throw new ApiError(500,error)
     }

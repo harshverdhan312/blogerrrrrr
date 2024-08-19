@@ -16,4 +16,4 @@ router.route("removecomment").delete(
 )
 
 
-module.exports = router
+module.exports = {router}

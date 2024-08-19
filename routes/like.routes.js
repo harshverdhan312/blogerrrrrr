@@ -15,4 +15,4 @@ router.route("removelike").delete(
     removeLike
 )
 
-module.exports = router
+module.exports = {router}

@@ -22,4 +22,4 @@ const followersUserSchema = new Schema(
     })
 
 const followersModel = mongoose.model("followers", followersUserSchema);
-exports.followersModel = followersModel;
+module.exports.followersModel = followersModel;

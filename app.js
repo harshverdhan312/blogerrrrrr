@@ -15,18 +15,18 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 //routes import 
-const userRouter = require("./routes/user.routes.js")
-const blogRouter = require("./routes/blog.routes.js")
-const healthcheckRouter = require("./routes/healthcheck.routes");
-const followRouter = require("./routes/follow.routes.js")
-const likeRouter = require("./routes/like.routes.js")
-const commentRouter = require("./routes/comment.routes.js")
+const { router:userRouter } = require("./routes/user.routes.js")
+const { router:blogRouter } = require("./routes/blog.routes.js")
+const { router:healthCheckRouter } = require("./routes/healthcheck.routes");
+const { router:followRouter } = require("./routes/follow.routes.js")
+const { router:likeRouter } = require("./routes/like.routes.js")
+const { router:commentRouter }= require("./routes/comment.routes.js")
 
 //routes declaration
 
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/blogs", blogRouter)
-app.use("/api/v1/healthcheck", healthcheckRouter);
+app.use("/api/v1/healthcheck", healthCheckRouter);
 app.use("/api/v1/follow",followRouter)
 app.use("/api/v1/like",likeRouter)
 app.use("/api/v1/comment",commentRouter)

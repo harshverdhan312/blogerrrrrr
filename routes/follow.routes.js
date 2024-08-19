@@ -22,4 +22,4 @@ router.route("/countfollowers/:userId?").get(
 )
 
 
-module.exports = router;
+module.exports = {router};

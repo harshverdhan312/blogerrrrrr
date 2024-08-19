@@ -21,4 +21,4 @@ const followingUserSchema = new Schema(
 })
 
 const followingModel = mongoose.model("following", followingUserSchema);
-exports.followingModel = followingModel;
+module.exports.followingModel = followingModel;

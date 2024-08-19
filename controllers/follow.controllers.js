@@ -1,7 +1,7 @@
 const { asyncHandler } = require("../utils/asyncHandler");
 const { ApiResponse } = require("../utils/ApiResponse.js")
-const { followersModel } = require("../models/followers.models.js")
-const { followingModel } = require("../models/following.models.js")
+const { followersModel } = require("../models/following.model.js")
+const { followingModel } = require("../models/followers.models.js")
 
 
 const addFollow = asyncHandler(async (req, res) => {

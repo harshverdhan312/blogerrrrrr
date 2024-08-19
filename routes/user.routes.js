@@ -57,4 +57,4 @@ router.route("/me").get(
 
 
 
-module.exports = router;
+module.exports = {router};
