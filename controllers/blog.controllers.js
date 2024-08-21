@@ -22,7 +22,9 @@ const postBlog = asyncHandler(async(req,res)=>{
     ){
         throw new ApiError(400, "All fields are required")
     }
-    const coverImageLocalPath = req.files?.avatar[0]?.path
+    console.log(req.files)
+    
+    const coverImageLocalPath = req.files?.cover[0]?.path
 
     if(!coverImageLocalPath){
         throw new ApiError(400,"cover image is required")
@@ -44,14 +46,12 @@ const postBlog = asyncHandler(async(req,res)=>{
         coverImage:coverImage.url,
     })
 
-    const createdBlog = await userModel.findById(blog._id)
-
-    if (!createdBlog) {
+    if (!blog) {
         throw new ApiError(500, "Something went wrong while uploading the Blog")
     }
 
     return res.status(201).json(
-        new ApiResponse(200, createdBlog, "Blog Uploaded Successfully")
+        new ApiResponse(200, blog, "Blog Uploaded Successfully")
     )
 })
 

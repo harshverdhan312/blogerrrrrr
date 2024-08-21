@@ -4,7 +4,7 @@ const { Schema } = require("mongoose");
 
 const blogsSchema = new Schema(
     {
-      title: {
+      blogTitle: {
         type: String,
         required: true,
       },
@@ -17,27 +17,26 @@ const blogsSchema = new Schema(
         type:String,
         required: true,
       },
-      mainbody: {
+      blogBody: {
         type:String,
         required: true,
       },
-      genre:{
+      blogGenre:{
         type:String,
         required : true,
       },
-      wordslenght:{
+      blogLenght:{
         type:String,
         possibleValues: ["less than 100 words ", "more than 100 words"],
         required:true
       },
-      forkids:{
+      isSuitableForKids:{
         type:Boolean,
         required: true
       },
       likesCount:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"Like",
-        required:true,
       },
       comments:{
         type: mongoose.Schema.Types.ObjectId,
